@@ -18,7 +18,7 @@
 
 class relativity
 {
-  public:
+public:
 
   relativity()
   {
@@ -30,6 +30,11 @@ class relativity
   double getC()
   { 
     return _c;
+  };
+
+  double getG()
+  { 
+    return _G;
   };
 
   
@@ -109,13 +114,14 @@ class relativity
 // relativistic corrections for gravity
 //
 
-  double gravitationalTime(double time, double speed)
+  double gravitationalTime(double time, double mass, double radius)
   {
-    return time * factor(speed);
+    // formula tries to stay within float range
+    return time / sqrt(1 - (mass / (radius * _c2)) * (2 * _G) );
   }
 
-  // returns diameter in km.
-  double diameterEarth(uint8_t longitude = 45)  // 0..90
+  // returns radius in km.
+  double radiusEarth(uint8_t longitude = 45)  // 0..90
   {
     // https://www.youtube.com/watch?v=hYMvJum9_Do  @ 8:00
     // radius polar:    6357 km
@@ -127,17 +133,49 @@ class relativity
     return 6367.5 + 10.5 * cos(radians * 2);
   }
 
-  private:
-  
-  const double _c = 299792458.0;
-  const double _c2 = c * c;
-  const double _divc = 1.0/_c;
-  
+  // mass in 
+  double getPlanetMass(uint8_t n)  // sun = 0; mercury = 1 etc
+  {
+    return massPlanets[n];
+  }
+
+  // radius in km
+  double getPlanetRadius(uint8_t n)  // sun = 0; mercury = 1 etc
+  {
+    // todo
+    return 0;
+  }
+
+
+private:
+
+  const double _c = 299792458.0;        // speed of light
+  const double _c2 = _c * _c;           // sol squared
+  const double _divc = 1.0/_c;          // sol inverse
+
+  const double _G = 6.6742e-11;         // gravitational constant
+
+  const double massPlanets[4] =
+  {
+    1.9891e30,      // mass Sun
+    0,
+    0,
+    5.97219e24,     // mass earth
+  };
+
+  const double radiusPlanets[4] =
+  {
+    6.96342e5,      // radius Sun
+    0,
+    0,
+    6.371e3,        // radius earth
+  };
+
+  // cache
   double _speed  = 0.0;
   double _factor = 1.0;
   double _gamma  = 1.0;
-
-
 };
+
 
 // -- END OF FILE --

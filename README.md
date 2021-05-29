@@ -21,6 +21,8 @@ Educational purposes or when one put a cubesat into space :)
 ## Interface
 
 - **relativity()** constructor
+- ** double getC()** returns speed of light
+- ** double getG()** returns gravitational constant
 - **double factor(double speed)**
 - **double gamma(double speed)**
 - **double relativeTime(double time, double speed)** returns the relative time for given time and speed.
@@ -64,4 +66,6 @@ See examples for typical usage.
 - add more functions
 - fix some overflow conditions.
 
-
+- add planets to gravitational table
+- add moons?
+- add caching version of mass / radius;

@@ -20,21 +20,14 @@ void setup()
   Serial.print("\nSpeed of light (m/s):\t");
   Serial.println(R.getC());
 
-  Serial.println("\n Percentage\t Speed\t\t Time\\n");
-
-  for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
+  for (uint8_t p = 0; p < 4; p++)
   {
-    double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 5);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(R.gravitationalTime(1, v), 5);
-    Serial.println();
+    Serial.print(p);
+    Serial.print(":\t");
+    Serial.println(R.gravitationalTime(1, R.getPlanetMass(p), R.getPlanetRadius(p)));
   }
-  Serial.println("done...");
+
+  Serial.println("\ndone...");
 }
 
 

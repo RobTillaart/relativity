@@ -73,18 +73,9 @@ unittest(test_alpha_gamma)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 4);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(factor(v), 6);
-    Serial.print("\t ");
-    Serial.print(gamma(v), 6);
-    Serial.println();
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, factor(v), gamma(v));
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 
 }
 
@@ -99,16 +90,9 @@ unittest(test_relativeTime)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 4);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(R.relativeTime(1, v), 5);
-    Serial.println();
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeTime(1, v));
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 }
 
 
@@ -122,16 +106,9 @@ unittest(test_relativeLength)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 4);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(R.relativeLength(1, v), 5);
-    Serial.println();
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeLength(1, v));
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 }
 
 
@@ -145,16 +122,9 @@ unittest(test_relativeMass)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 4);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(R.relativeMass(1, v), 5);
-    Serial.println();
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeMass(1, v));
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 }
 
 
@@ -168,16 +138,9 @@ unittest(test_EnergyMass)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-
-    Serial.print(" ");
-    Serial.print(perc, 4);
-    Serial.print("\t ");
-    Serial.print(v * 0.001);
-    Serial.print("\t ");
-    Serial.print(R.EnergyMass(1, v), 5);
-    Serial.println();
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.EnergyMass(1, v));
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 }
 
 
@@ -185,30 +148,33 @@ unittest(test_gravitationalTime)
 {
   relativity R;
 
-  assertEqualFloat(1.0, R.gravitationalTime(1, 0), 0.0001);
+  assertEqualFloat(6.6742e-11, R.getG(), 1e-11);
 
-  // TODO
+
+  for (uint8_t p = 0; p < 4; p++)
+  {
+    double m = R.getPlanetMass(p);
+    double r = R.getPlanetRadius(p);
+    fprintf(stderr, " %d\t%.2f\t%f\t%f\t%.6f\n", p, m, r, R.gravitationalTime(1, m, r));
+  }
+
+  fprintf(stderr, "done...");
 }
 
 
-unittest(test_diameterEarth)
+unittest(test_radiusEarth)
 {
   relativity R;
 
-  assertEqualFloat(6357, R.diameterEarth(90), 0.001);
-  assertEqualFloat(6378, R.diameterEarth(00), 0.001);
+  assertEqualFloat(6357, R.radiusEarth(90), 0.001);
+  assertEqualFloat(6378, R.radiusEarth(00), 0.001);
 
   for (uint8_t lon = 0; lon < 91; lon +=3)
   {
-    double dia = diameterEarth(lon);
-
-    Serial.print(" ");
-    Serial.print(lon);
-    Serial.print("\t ");
-    Serial.print(dia, 1);
-    Serial.println();
+    double dia = radiusEarth(lon);
+    fprintf(stderr, " %d\%f%f\n", lon, dia);
   }
-  Serial.println("done...");
+  fprintf(stderr, "done...");
 
 }
 
