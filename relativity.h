@@ -20,21 +20,28 @@ class relativity
 {
   public:
 
+  relativity()
+  {
+    double _speed  = 0.0;
+    double _factor = 1.0;
+    double _gamma  = 1.0;
+  }
+
   double getC()
   { 
-    return c;
+    return _c;
   };
 
   
   double factor(double speed)
   {
-    double alpha = speed * divc;
+    double alpha = speed * _divc;
     return sqrt(1 - alpha * alpha);
   }
   
   double gamma(double speed)
   {
-    return 1 - factor(speed);
+    return 1.0 / factor(speed);
   }
   
 ///////////////////////////////////////////////////////////////////
@@ -59,7 +66,41 @@ class relativity
 
   double EnergyMass(double mass, double speed)
   {
-    return relativeMass(mass, speed) * c * c;
+    return relativeMass(mass, speed) * _c2;
+  }
+
+
+  // set speed only once for the 3 values
+  void setSpeed(double speed = 0)
+  {
+    _speed = speed;
+    _factor = factor(speed);
+    _gamma = gamma(speed);
+  }
+
+  double getSpeed()
+  {
+    return _speed;
+  }
+
+  double relativeTime(double time)
+  {
+    return time * _factor;
+  }
+
+  double relativeLength(double length)
+  {
+    return length * _factor;
+  }
+
+  double relativeMass(double mass)
+  {
+    return mass * _gamma;
+  }
+
+  double EnergyMass(double mass)
+  {
+    return relativeMass(mass) * _c2;
   }
 
 
@@ -88,8 +129,13 @@ class relativity
 
   private:
   
-  const double c = 299792458.0;
-  const double divc = 1.0/c;
+  const double _c = 299792458.0;
+  const double _c2 = c * c;
+  const double _divc = 1.0/_c;
+  
+  double _speed  = 0.0;
+  double _factor = 1.0;
+  double _gamma  = 1.0;
 
 
 };

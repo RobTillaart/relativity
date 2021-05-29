@@ -22,7 +22,7 @@ void setup()
   Serial.print("\nSpeed of light (m/s):\t");
   Serial.println(R.getC());
 
-  Serial.println("\n Percentage\t Speed\t factor\t\t gamma\n");
+  Serial.println("\n Percentage\t Speed\t\t factor\t\t gamma\n");
 
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
