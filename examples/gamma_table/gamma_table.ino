@@ -1,5 +1,5 @@
 //
-//    FILE: rel.ino
+//    FILE: gamma_table.ino
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.1.0
 // PURPOSE: test formulas
@@ -22,24 +22,20 @@ void setup()
   Serial.print("\nSpeed of light (m/s):\t");
   Serial.println(R.getC());
 
-  Serial.println("\n Percentage\t Speed\t\t Time\t\t Length\t\t Mass\n");
+  Serial.println("\n Percentage\t Speed\t factor\t\t gamma\n");
 
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
 
     Serial.print(" ");
-    Serial.print(perc, 4);
+    Serial.print(perc, 5);
     Serial.print("\t ");
     Serial.print(v * 0.001);
     Serial.print("\t ");
-    Serial.print(R.relativeTime(1, v), 5);
+    Serial.print(R.factor(v), 6);
     Serial.print("\t ");
-    Serial.print(R.relativeLength(1, v ), 5);
-    Serial.print("\t ");
-    Serial.print(R.relativeMass(1, v), 3);
-    Serial.print("\t ");
-    Serial.print(R.EnergyMass(1, v), 2);
+    Serial.print(R.gamma(v ), 6);
     Serial.println();
   }
   Serial.println("done...");

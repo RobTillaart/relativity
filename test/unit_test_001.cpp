@@ -56,16 +56,35 @@ unittest(test_constructor)
   relativity R;
 
   assertEqualFloat(299792458.0, R.getC(), 1);
-  
+
 }
 
 
-unittest(test_alpha)
+unittest(test_alpha_gamma)
 {
   relativity R;
 
-// TODO test with factor and gamma
-// loop
+  assertEqualFloat(1.0, R.factor(0), 0.0001);
+  assertEqualFloat(0.0, R.factor(R.getC()), 0.0001);
+
+  assertEqualFloat(0.0, R.gamma(0), 0.0001);
+  assertEqualFloat(0.0, R.gamma(R.getC()), 0.0001);
+
+  for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
+  {
+    double v = R.getC() * perc * 0.01;
+
+    Serial.print(" ");
+    Serial.print(perc, 4);
+    Serial.print("\t ");
+    Serial.print(v * 0.001);
+    Serial.print("\t ");
+    Serial.print(factor(v), 6);
+    Serial.print("\t ");
+    Serial.print(gamma(v), 6);
+    Serial.println();
+  }
+  Serial.println("done...");
 
 }
 
@@ -73,6 +92,9 @@ unittest(test_alpha)
 unittest(test_relativeTime)
 {
   relativity R;
+
+  assertEqualFloat(1.0, R.relativeTime(1, 0), 0.0001);
+  assertEqualFloat(0.0, R.relativeTime(1, R.getC()), 0.0001);
 
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
@@ -94,6 +116,9 @@ unittest(test_relativeLength)
 {
   relativity R;
 
+  assertEqualFloat(1.0, R.relativeLength(1, 0), 0.0001);
+  assertEqualFloat(0.0, R.relativeLength(1, R.getC()), 0.0001);
+
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -113,6 +138,9 @@ unittest(test_relativeLength)
 unittest(test_relativeMass)
 {
   relativity R;
+
+  assertEqualFloat(1.0, R.relativeMass(1, 0), 0.0001);
+  assertEqualFloat(0.0, R.relativeMass(1, R.getC()), 0.0001);
 
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
@@ -134,6 +162,9 @@ unittest(test_EnergyMass)
 {
   relativity R;
 
+  assertEqualFloat(1.0, R.EnergyMass(1, 0), 0.0001);
+  assertEqualFloat(0.0, R.EnergyMass(1, R.getC()), 0.0001);
+
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -154,12 +185,30 @@ unittest(test_gravitationalTime)
 {
   relativity R;
 
+  assertEqualFloat(1.0, R.gravitationalTime(1, 0), 0.0001);
+
+  // TODO
 }
 
 
 unittest(test_diameterEarth)
 {
   relativity R;
+
+  assertEqualFloat(6357, R.diameterEarth(90), 0.001);
+  assertEqualFloat(6378, R.diameterEarth(00), 0.001);
+
+  for (uint8_t lon = 0; lon < 91; lon +=3)
+  {
+    double dia = diameterEarth(lon);
+
+    Serial.print(" ");
+    Serial.print(lon);
+    Serial.print("\t ");
+    Serial.print(dia, 1);
+    Serial.println();
+  }
+  Serial.println("done...");
 
 }
 

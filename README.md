@@ -11,13 +11,31 @@ Arduino library with relativity functions.
 
 ## Description
 
-This library does 
+This library implements a number of functions that give indication of the 
+time dilation etc due to relativistic speed.
+
+The library is not extensively tested.
 
 Educational purposes or when one put a cubesat into space :)
 
 ## Interface
 
 - **relativity()** constructor
+- **double factor(double speed)**
+- **double gamma(double speed)**
+
+### relativity effects
+
+- **double relativeTime(double time, double speed)**
+- **double relativeLength(double length, double speed)**
+- **double relativeMass(double mass, double speed)**
+- **double EnergyMass(double mass, double speed)**
+
+
+### gravity effects
+
+- **double gravitationalTime(double time, double speed)**
+- **double diameterEarth(uint8_t longitude = 45)**
 
 
 
@@ -27,4 +45,8 @@ See examples for typical usage.
 
 
 ## Future
+
+- add more functions
+- fix some overflow conditions.
+
 
