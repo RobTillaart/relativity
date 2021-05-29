@@ -73,7 +73,7 @@ unittest(test_alpha_gamma)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, factor(v), gamma(v));
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, R.factor(v), R.gamma(v));
   }
   fprintf(stderr, "done...");
 
