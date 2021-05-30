@@ -68,7 +68,7 @@ unittest(test_alpha_gamma)
   assertEqualFloat(0.0, R.factor(R.getC()), 0.0001);
 
   assertEqualFloat(1.0, R.gamma(0), 0.0001);
-  assertInfinity(R.gamma(R.getC()));
+  assertInfinity(R.gamma(R.getC()) );
 
   fprintf(stderr, "\n perc\t\tspeed\t\tfactor\t\tgamma\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
@@ -120,7 +120,7 @@ unittest(test_relativeMass)
   relativity R;
 
   assertEqualFloat(1.0, R.relativeMass(1, 0), 0.0001);
-  assertInfinity(R.relativeMass(1, R.getC()));
+  assertInfinity(R.relativeMass(1, R.getC()) );
 
   fprintf(stderr, "\n perc\t\tspeed\t\tmass\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
@@ -137,7 +137,7 @@ unittest(test_EnergyMass)
   relativity R;
 
   assertEqualFloat(8.98755e+16, R.EnergyMass(1, 0), 1e10);
-  assertInfinity((R.EnergyMass(1, R.getC()));
+  assertInfinity(R.EnergyMass(1, R.getC()) );
 
   fprintf(stderr, "\n perc\t\tspeed\t\tenergy\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
