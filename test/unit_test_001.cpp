@@ -76,7 +76,7 @@ unittest(test_alpha_gamma)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, "\t%.4f\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, R.factor(v), R.gamma(v));
+    fprintf(stderr, "\t%.4f\t\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, R.factor(v), R.gamma(v));
   }
   fprintf(stderr, "done...\n");
 }
@@ -178,7 +178,7 @@ unittest(test_radiusEarth)
   for (uint8_t lon = 0; lon < 91; lon +=3)
   {
     double dia = R.radiusEarth(lon);
-    fprintf(stderr, "\t%d\t%0.0f\n", lon, dia);
+    fprintf(stderr, "\t%d\t%0.1f\n", lon, dia);
   }
   fprintf(stderr, "done...\n");
 }
