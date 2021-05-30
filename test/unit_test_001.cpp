@@ -144,7 +144,7 @@ unittest(test_EnergyMass)
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.0f\t\n", perc, v * 0.001, R.EnergyMass(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%e\t\n", perc, v * 0.001, R.EnergyMass(1, v));
   }
   fprintf(stderr, "done...\n");
 }
@@ -156,12 +156,12 @@ unittest(test_gravitationalTime)
 
   assertEqualFloat(6.6742e-11, R.getG(), 1e-15);
 
-  fprintf(stderr, "\n perc\tmass\tradius\ttime\n");
+  fprintf(stderr, "\n\tplanet\tmass\tradius\ttime\n");
   for (uint8_t p = 0; p < 4; p++)
   {
     double m = R.getPlanetMass(p);
     double r = R.getPlanetRadius(p);
-    fprintf(stderr, " %d\t%.2f\t%f\t%f\t%.6f\n", p, m, r, R.gravitationalTime(1, m, r));
+    fprintf(stderr, "\t%d\t%0.0f\t%0.0f\t%e\n", p, m, r, R.gravitationalTime(1, m, r));
   }
   fprintf(stderr, "done...\n");
 }
