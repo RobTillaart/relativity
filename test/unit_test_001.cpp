@@ -55,8 +55,10 @@ unittest(test_constructor)
 
   relativity R;
 
+  // test constants
   assertEqualFloat(299792458.0, R.getC(), 1);
-
+  assertEqualFloat(6.6742e-11, R.getG(), 1e-15);
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -76,8 +78,7 @@ unittest(test_alpha_gamma)
     double v = R.getC() * perc * 0.01;
     fprintf(stderr, " %.4f\t%.4f\t%.6f\t%.6f\n", perc, v * 0.001, R.factor(v), R.gamma(v));
   }
-  fprintf(stderr, "done...");
-
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -94,7 +95,7 @@ unittest(test_relativeTime)
     double v = R.getC() * perc * 0.01;
     fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeTime(1, v));
   }
-  fprintf(stderr, "done...");
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -111,7 +112,7 @@ unittest(test_relativeLength)
     double v = R.getC() * perc * 0.01;
     fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeLength(1, v));
   }
-  fprintf(stderr, "done...");
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -128,7 +129,7 @@ unittest(test_relativeMass)
     double v = R.getC() * perc * 0.01;
     fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeMass(1, v));
   }
-  fprintf(stderr, "done...");
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -136,16 +137,16 @@ unittest(test_EnergyMass)
 {
   relativity R;
 
-  assertEqualFloat(8.98755e+16, R.EnergyMass(1, 0), 1e10);
+  assertEqualFloat(8.98755e+16, R.EnergyMass(1, 0), 1e11);
   assertInfinity(R.EnergyMass(1, R.getC()) );
 
   fprintf(stderr, "\n perc\t\tspeed\t\tenergy\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.EnergyMass(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%.0f\t\n", perc, v * 0.001, R.EnergyMass(1, v));
   }
-  fprintf(stderr, "done...");
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -162,8 +163,7 @@ unittest(test_gravitationalTime)
     double r = R.getPlanetRadius(p);
     fprintf(stderr, " %d\t%.2f\t%f\t%f\t%.6f\n", p, m, r, R.gravitationalTime(1, m, r));
   }
-
-  fprintf(stderr, "done...");
+  fprintf(stderr, "done...\n");
 }
 
 
@@ -180,8 +180,7 @@ unittest(test_radiusEarth)
     double dia = R.radiusEarth(lon);
     fprintf(stderr, " %d\t%f\t%f\n", lon, dia);
   }
-  fprintf(stderr, "done...");
-
+  fprintf(stderr, "done...\n");
 }
 
 
