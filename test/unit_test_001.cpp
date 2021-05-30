@@ -67,9 +67,10 @@ unittest(test_alpha_gamma)
   assertEqualFloat(1.0, R.factor(0), 0.0001);
   assertEqualFloat(0.0, R.factor(R.getC()), 0.0001);
 
-  assertEqualFloat(0.0, R.gamma(0), 0.0001);
-  assertEqualFloat(0.0, R.gamma(R.getC()), 0.0001);
+  assertEqualFloat(1.0, R.gamma(0), 0.0001);
+  // gamma goes to infinity
 
+  fprintf(stderr, "\n perc\tfactor\tgamma\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -87,6 +88,7 @@ unittest(test_relativeTime)
   assertEqualFloat(1.0, R.relativeTime(1, 0), 0.0001);
   assertEqualFloat(0.0, R.relativeTime(1, R.getC()), 0.0001);
 
+  fprintf(stderr, "\n perc\tspeed\ttime\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -103,6 +105,7 @@ unittest(test_relativeLength)
   assertEqualFloat(1.0, R.relativeLength(1, 0), 0.0001);
   assertEqualFloat(0.0, R.relativeLength(1, R.getC()), 0.0001);
 
+  fprintf(stderr, "\n perc\tspeed\tlength\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -119,6 +122,7 @@ unittest(test_relativeMass)
   assertEqualFloat(1.0, R.relativeMass(1, 0), 0.0001);
   assertEqualFloat(0.0, R.relativeMass(1, R.getC()), 0.0001);
 
+  fprintf(stderr, "\n perc\tspeed\tmass\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -135,6 +139,7 @@ unittest(test_EnergyMass)
   assertEqualFloat(1.0, R.EnergyMass(1, 0), 0.0001);
   assertEqualFloat(0.0, R.EnergyMass(1, R.getC()), 0.0001);
 
+  fprintf(stderr, "\n perc\tspeed\tenergy\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -150,7 +155,7 @@ unittest(test_gravitationalTime)
 
   assertEqualFloat(6.6742e-11, R.getG(), 1e-11);
 
-
+  fprintf(stderr, "\n perc\tmass\tradius\ttime\n");
   for (uint8_t p = 0; p < 4; p++)
   {
     double m = R.getPlanetMass(p);
@@ -169,6 +174,7 @@ unittest(test_radiusEarth)
   assertEqualFloat(6357, R.radiusEarth(90), 0.001);
   assertEqualFloat(6378, R.radiusEarth(00), 0.001);
 
+  fprintf(stderr, "\n lon\tdiameter\n");
   for (uint8_t lon = 0; lon < 91; lon +=3)
   {
     double dia = R.radiusEarth(lon);
