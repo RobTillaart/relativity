@@ -156,6 +156,7 @@ private:
   const double _G = 6.6742e-11;         // gravitational constant
 
   // wikipedia
+  // kg
   const double massPlanets[10] =
   {
     1.9891e30,      // Sun
@@ -170,7 +171,8 @@ private:
     13.03e21,       // Pluto
   };
 
-  const double radiusPlanets[4] =
+  // km
+  const double radiusPlanets[10] =
   {
     695508,         // Sun
     2439.4,         // Mercury
