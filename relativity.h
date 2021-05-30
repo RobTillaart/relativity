@@ -160,7 +160,7 @@ private:
   const double massPlanets[10] =
   {
     1.9891e30,      // Sun
-    330.11e21       // Mercury
+    330.11e21,      // Mercury
     4867.5e21,      // Venus
     5972.4e21,      // Earth
     641.71e21,      // Mars
