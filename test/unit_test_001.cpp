@@ -68,9 +68,9 @@ unittest(test_alpha_gamma)
   assertEqualFloat(0.0, R.factor(R.getC()), 0.0001);
 
   assertEqualFloat(1.0, R.gamma(0), 0.0001);
-  // gamma goes to infinity
+  assertInfinity(R.gamma(R.getC()));
 
-  fprintf(stderr, "\n perc\tfactor\tgamma\n");
+  fprintf(stderr, "\n perc\t\tspeed\t\tfactor\t\tgamma\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
@@ -88,11 +88,11 @@ unittest(test_relativeTime)
   assertEqualFloat(1.0, R.relativeTime(1, 0), 0.0001);
   assertEqualFloat(0.0, R.relativeTime(1, R.getC()), 0.0001);
 
-  fprintf(stderr, "\n perc\tspeed\ttime\n");
+  fprintf(stderr, "\n perc\t\tspeed\t\ttime\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeTime(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeTime(1, v));
   }
   fprintf(stderr, "done...");
 }
@@ -105,11 +105,11 @@ unittest(test_relativeLength)
   assertEqualFloat(1.0, R.relativeLength(1, 0), 0.0001);
   assertEqualFloat(0.0, R.relativeLength(1, R.getC()), 0.0001);
 
-  fprintf(stderr, "\n perc\tspeed\tlength\n");
+  fprintf(stderr, "\n perc\t\tspeed\t\tlength\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeLength(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeLength(1, v));
   }
   fprintf(stderr, "done...");
 }
@@ -120,13 +120,13 @@ unittest(test_relativeMass)
   relativity R;
 
   assertEqualFloat(1.0, R.relativeMass(1, 0), 0.0001);
-  assertEqualFloat(0.0, R.relativeMass(1, R.getC()), 0.0001);
+  assertInfinity(R.relativeMass(1, R.getC()));
 
-  fprintf(stderr, "\n perc\tspeed\tmass\n");
+  fprintf(stderr, "\n perc\t\tspeed\t\tmass\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.relativeMass(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.relativeMass(1, v));
   }
   fprintf(stderr, "done...");
 }
@@ -136,14 +136,14 @@ unittest(test_EnergyMass)
 {
   relativity R;
 
-  assertEqualFloat(1.0, R.EnergyMass(1, 0), 0.0001);
-  assertEqualFloat(0.0, R.EnergyMass(1, R.getC()), 0.0001);
+  assertEqualFloat(8.98755e+16, R.EnergyMass(1, 0), 1e10);
+  assertInfinity((R.EnergyMass(1, R.getC()));
 
-  fprintf(stderr, "\n perc\tspeed\tenergy\n");
+  fprintf(stderr, "\n perc\t\tspeed\t\tenergy\n");
   for (double perc = 1; perc < 99.9999; perc += (100 - perc) / 10)
   {
     double v = R.getC() * perc * 0.01;
-    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, v, R.EnergyMass(1, v));
+    fprintf(stderr, " %.4f\t%.4f\t%.6f\t\n", perc, v * 0.001, R.EnergyMass(1, v));
   }
   fprintf(stderr, "done...");
 }
@@ -153,7 +153,7 @@ unittest(test_gravitationalTime)
 {
   relativity R;
 
-  assertEqualFloat(6.6742e-11, R.getG(), 1e-11);
+  assertEqualFloat(6.6742e-11, R.getG(), 1e-15);
 
   fprintf(stderr, "\n perc\tmass\tradius\ttime\n");
   for (uint8_t p = 0; p < 4; p++)
@@ -178,7 +178,7 @@ unittest(test_radiusEarth)
   for (uint8_t lon = 0; lon < 91; lon +=3)
   {
     double dia = R.radiusEarth(lon);
-    fprintf(stderr, " %d\%f%f\n", lon, dia);
+    fprintf(stderr, " %d\t%f\t%f\n", lon, dia);
   }
   fprintf(stderr, "done...");
 
