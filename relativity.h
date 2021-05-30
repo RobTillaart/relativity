@@ -142,8 +142,7 @@ public:
   // radius in km
   double getPlanetRadius(uint8_t n)  // sun = 0; mercury = 1 etc
   {
-    // todo
-    return 0;
+    return radiusPlanets[n];
   }
 
 
