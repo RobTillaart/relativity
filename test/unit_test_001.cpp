@@ -178,7 +178,7 @@ unittest(test_radiusEarth)
   for (uint8_t lon = 0; lon < 91; lon +=3)
   {
     double dia = R.radiusEarth(lon);
-    fprintf(stderr, " %d\t%f\t%f\n", lon, dia);
+    fprintf(stderr, " %d\t%f\n", lon, dia);
   }
   fprintf(stderr, "done...\n");
 }

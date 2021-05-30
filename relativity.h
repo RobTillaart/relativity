@@ -155,20 +155,32 @@ private:
 
   const double _G = 6.6742e-11;         // gravitational constant
 
-  const double massPlanets[4] =
+  const double massPlanets[10] =
   {
-    1.9891e30,      // mass Sun
-    0,
-    0,
-    5.97219e24,     // mass earth
+    1.9891e30,      // Sun
+    0,              // Mercury
+    0,              // Venus
+    5.97219e24,     // Earth
+    0,              // Mars
+    0,              // Jupiter
+    0,              // Saturnus
+    0,              // Neptunis
+    0,              // Uranus
+    0,              // Pluto
   };
 
   const double radiusPlanets[4] =
   {
-    6.96342e5,      // radius Sun
-    0,
-    0,
-    6.371e3,        // radius earth
+    695508,         // Sun
+    2439.4,         // Mercury
+    6052,           // Venus
+    6371,           // Earth
+    3389.5,         // Mars
+    69911,          // Jupiter
+    58232,          // Saturnus
+    24622,          // Neptunus
+    3981,           // Uranus
+    1188.3,         // Pluto
   };
 
   // cache
