@@ -14,6 +14,7 @@ uint32_t start, stop;
 
 relativity R;
 
+
 void setup()
 {
   Serial.begin(115200);
