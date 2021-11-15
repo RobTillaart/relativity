@@ -122,7 +122,7 @@ public:
   }
 
   // returns radius in km.
-  double radiusEarth(uint8_t longitude = 45)  // 0..90
+  double radiusEarth(double longitude = 45)  // 0..90
   {
     // https://www.youtube.com/watch?v=hYMvJum9_Do  @ 8:00
     // radius polar:    6357 km
@@ -130,7 +130,7 @@ public:
     // difference:      21 km      
     double radians = longitude * (PI / 180.0);
 
-    // approx of the graph in youtube with a cosine
+    // approx of the graph in YouTube with a cosine
     return 6367.5 + 10.5 * cos(radians * 2);
   }
 
